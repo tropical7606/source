@@ -80,13 +80,18 @@ number_braille=[[1,0,0,0,0,0],[1,0,1,0,0,0],[1,1,0,0,0,0],[1,1,0,1,0,0],[1,0,0,1
 
 """
 test
+? = [[0,0,1,0,1,1]]  # 문장부호 오류가 발생 -> jamo라이브러리 오류라 나온다 -> 해결 못함..
+그래서  = [[1,0,0,0,0,0],[0,1,1,0,1,0] ]
+구 = [[0,1,0,0,0,0],[1,1,0,0,1,0]]
 걲 = [[0,1,0,0,0,0],[1,1,0,1,0,1],[1,0,0,0,0,0]]
 실기 = [[0,0,0,0,0,1],[1,0,0,1,1,0],[0,0,1,0,0,0],[0,1,0,0,0,0],[1,0,0,1,1,0]]
 까 = [[0,0,0,0,0,1],[1,1,1,0,0,1]]
 억 = [[1,1,0,1,0,1]]
-"""
+1 = [[1,0,0,0,0,0]]
+ㅏ = [[1,0,1,0,0,1]]
+ """
 
-input = [[0,0,0,0,0,1],[1,0,0,1,1,0],[0,0,1,0,0,0],[0,1,0,0,0,0],[1,0,0,1,1,0]]
+input = [[0,0,1,0,1,1]]
 output = []
 
 
@@ -116,10 +121,20 @@ while True:
             text.append("것")
             cnt += 2
 
-    elif input[cnt] == [1,0,0,0,0,0]: # 부사 '그래서', '그러나', '그러면', '그러므로', '그런데', '그리고'
-        idx = adverb_braille.index(input[cnt])
-        text.append(adverb[idx])
+
+
+    elif input[cnt] in number_braille:  # 숫자인지 확인하는 if문 -> 숫자와 자음의 점자가 같은 것도 있으므로 input[cnt +1 ]이 모음이라면 숫자가 아니라고 판단
+        idx = number_braille.index(input[cnt])
+        text.append(number[idx])
         cnt += 1
+
+    #숫자인지 먼저 확인하고 부사인지 확인해야 숫자 결과값 알 수 있다
+    elif (input[cnt] == [1,0,0,0,0,0]) and input[cnt+1] in adverb_braille: # 부사 '그래서', '그러나', '그러면', '그러므로', '그런데', '그리고'
+        #다음에 글자가 있을 경우라고 명시 해줘야 함
+        #즉 부사는 [1,0,0,0,0,0][~]로 이루어져 있으므로 현재 값이 [1,0,0,0,0,0]이면서 adverb_braille에 값이 있다면 부사로 본다(elif 조건에 대한 것)
+        idx = adverb_braille.index(input[cnt+1]) #부사인 것을 알았으니 다음(cnt +1)을 통해 어떤 부사인지 확인한다
+        text.append(adverb[idx])
+        cnt += 2
 
     elif input[cnt] in acronyms_1_braille: # 약어1 '가','나','다','마','바','사','자','카','타','파','하'
         idx = acronyms_1_braille.index(input[cnt])
@@ -196,9 +211,18 @@ while True:
             elif input[cnt] == [1,1,1,0,1,0]:
                 text.append("ㅞ")
             cnt += 1
-        else:
-            text.append(jungsung[idx])
 
+        else:
+            if (cnt - 1) < 0:
+                text.append("ㅇ")
+
+            text.append( jungsung[idx])
+
+        cnt += 1
+
+    elif input[cnt] in sentenceSign_braille:  # 문장 부호
+        idx = sentenceSign_braille.index(input[cnt])
+        text.append(idx)
         cnt += 1
 
     elif input[cnt] in jongsung_braille: # 종성
@@ -212,19 +236,9 @@ while True:
         text.append(j)
         cnt += 1
 
-    elif input[cnt] in sentenceSign_braille:#문장 부호
-        idx = sentenceSign_braille.index(input[cnt])
-        text.append(idx)
-        cnt += 1
 
-    elif input[cnt] in number_braille:#숫자인지 확인하는 if문 -> 숫자와 자음의 점자가 같은 것도 있으므로 input[cnt +1 ]이 모음이라면 숫자가 아니라고 판단
-        number_ture = True;
 
-        if(number_ture <= len(input)and input[cnt + 1]  in jungsung_braille):
-            number_ture = False #만일 자음이 온다면 숫자가 아니다
-        idx =  number_braille.index(input[cnt])
-        text.append(number[idx])
-        cnt += 1
+
 
 
 
