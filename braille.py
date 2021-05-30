@@ -81,7 +81,10 @@ input = [[0,0,0,0,0,1],[1,0,0,1,1,0],[0,0,1,0,0,0],[0,1,0,0,0,0],[1,0,0,1,1,0]]
 output = []
 
 
-from hangul_utils import join_jamos,split_syllables
+# from hangul_utils import join_jamos,split_syllables
+from unicode import join_jamos,split_syllables
+# hangul_utils 패키지를 안받아도 사용 가능하게 변경
+# from 옆에 unicode.py 파일 위치로 변경해서 사용하세요
 
 def make_gyeobbadchim(a,b): #겹받침 만드는 함수 -> 함수명 좋은거 있음 바꿔주세요...
     #"ㄲ" "ㄳ", "ㄵ", "ㄶ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅄ"
