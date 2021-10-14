@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>점치고 파일 번역</title>
+    <script>
+        function sumbitButton(){
+            alert("pdf 점자 번역을 진행합니다.");
+        }
+    </script>
+    <style>
+         * {
+                font-family: 'Jua', sans-serif;
+
+            }
+    </style>
+</head>
+
+<body>
+
+    <h1>점자 번역 프로그램</h1>
+
+    <p>PDF 파일 첨부</p>
+    <form action="http://localhost:5000/PDF_result" method="POST"
+             enctype="multipart/form-data">
+        <div>
+
+            번역할 PDF 파일 : <input type="file" name="file"/>
+            <input type="submit" onclick="sumbitButton()"/>
+        </div>
+
+    </form>
+
+
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <script>
+            function goPython(){
+                $.ajax({
+                  url: "D:\newTest_mywork\braille_jy_1.py",
+                 context: document.body
+                }).done(function() {
+                 alert('finished python script');;
+                });
+            }
+
+    </script>
+
+
+    <br/>
+
+</body>
+
+</html>

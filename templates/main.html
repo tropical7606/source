@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="UTF-8">
+        <title>점치고</title>
+        <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha256-/ykJw/wDxMa0AQhHDYfuMEwVb4JHMx9h4jD4XvHqVzU=" crossorigin="anonymous" />
+
+        <style>
+          * {
+                font-family: 'Jua', sans-serif;
+
+
+            }
+            .titleFont{
+                margin:30px auto 30px auto;
+                display: grid;
+                place-items: center;
+                font-size: 60px;
+                font-weight:bold;
+            }
+            .mainBody{
+                width : 1000px;
+                border: 3px solid gray;
+                border-radius: 5px;
+                margin: 10px auto 30px auto;
+            }
+            .contentText{
+                font-size : 18px;
+                margin-top:30px;
+                margin-bottom: 100px;
+
+            }
+            .buttonCSS{
+                width:200px;
+                height:150px;
+                margin-right:20px;
+                font-size : 36px;
+
+            }
+            .mainButton{
+                display: inline;
+                margin :  10px auto 30px auto;
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+            <h1 class="titleFont">점자 번역 프로그램</h1>
+            <div class="mainBody">
+                <p class="contentText">안녕하세요. 점치고 점자 프로그램에 오신 것을 환영합니다.<br/>
+                    점치고는 pdf파일을 통한 한글, 영어, 특수 기호의 번역을 지원합니다.<br/>
+                    <span style="color:#ff0000;
+                                   font-size:20px;font-weight:bold;">**(단, 현재 버전에서는 영어와 한글을 함께 번역이 불가합니다. 한글 파일/영어 파일 분리해서 번역 사용을 부탁드립니다)**</span><br/>
+                    오류가 있을 경우 고객센터를 통해 제보해주세요.
+                </p>
+                <div class = "mainButton", method = "POST"  action = " ">
+                    <button class="buttonCSS" onclick="location.href='http://localhost:5000/PDF_trans';" >PDF 번역</button>
+                    <button a href = "TtoWeb" class = "buttonCSS" >직접 번역</button>
+                </div>
+
+            </div>
+<!--            다른 html 코드가 들어가는 공간-->
+
+    </body>
+    <footer>
+
+      <p onclick ="location.href='http://localhost:5000/고객센터';"> 고객센터</p>
+    </footer>
+</html>

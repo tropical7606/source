@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>점치고 결과값 확인</title>
+     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <style>
+        * {font-family: 'Jua', sans-serif;}
+        .resultText{
+              width : 1000px;
+              border: 3px solid gray;
+              border-radius: 5px;
+              margin: 10px auto 30px auto;
+              }
+
+    </style>
+</head>
+<body>
+    <span style="font-size:24px;
+                font-weight:bold;
+                text-align:center;
+                margin: 10px auto 30px auto;">번역할 점자 file</span>
+    <div class ="resultText">
+            {{fileData}}
+    </div>
+    <span style="font-size:24px;
+                font-weight:bold;
+                text-align:center;
+                margin: 10px auto 30px auto">결과값</span>
+    <div class ="resultText">
+            {{testDataHeml}}
+    </div>
+
+</body>
+</html>

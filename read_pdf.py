@@ -30,9 +30,11 @@ def Pdf_to_ASCII(path):
     for page_no in range(total_pages):
         rsrcmgr = PDFResourceManager()
         retstr = StringIO() # PDF에서 읽어온 아스키코드 값이 있는곳.
-        codec = 'utf-8'
+       # codec = 'utf-8'
         laparams = LAParams()
-        device = TextConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
+        device = TextConverter(rsrcmgr, retstr, laparams=laparams)
+        #device = TextConverter(rsrcmgr, retstr, codec = codec, laparams=laparams)
+
         fp = open(path, 'rb')
         password = ""
         maxpages = 0
