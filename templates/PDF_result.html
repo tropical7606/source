@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>점치고 결과값 확인</title>
      <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <style>
         * {font-family: 'Jua', sans-serif;}
         .resultText{
@@ -11,11 +14,20 @@
               border: 3px solid gray;
               border-radius: 5px;
               margin: 10px auto 30px auto;
+              height:200px;
               }
 
     </style>
+
+
 </head>
 <body>
+    <h1 style=" margin:30px auto 30px auto;
+                display: grid;
+                place-items: center;
+                font-size: 60px;
+                font-weight:bold;">점자 번역 프로그램</h1>
+    <hr>
     <span style="font-size:24px;
                 font-weight:bold;
                 text-align:center;
@@ -27,8 +39,24 @@
                 font-weight:bold;
                 text-align:center;
                 margin: 10px auto 30px auto">결과값</span>
-    <div class ="resultText">
-            {{testDataHeml}}
+    <div class ="resultText" id = "resultPDFText" >
+        {{testDataHeml}}
+         <script>
+        function Plusbr(){
+            document.write( '나오는가?');
+
+
+        }
+        Plusbr();
+    </script>
+    </div>
+    <div style="display:block;" align="center">
+        <button onclick="location.href='http://localhost:5000/';" type="button"
+                style="font-weight:bold;" class="btn btn-info">메인 페이지로
+        </button>
+        <button onclick="location.href='http://localhost:5000/PDF_trans';" type="button"
+                style="font-weight:bold;" class="btn btn-danger">다른 pdf번역
+        </button>
     </div>
 
 </body>

@@ -6,6 +6,8 @@
 
     <meta charset="UTF-8">
     <title>점치고 파일 번역</title>
+     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
     <script>
         function sumbitButton(){
             alert("pdf 점자 번역을 진행합니다.");
@@ -21,15 +23,44 @@
 
 <body>
 
-    <h1>점자 번역 프로그램</h1>
+    <h1 style=" margin:30px auto 0px auto;
+                    display: grid;
+                    place-items: center;
+                    font-size: 60px;
+                    font-weight:bold;">점자 번역 프로그램</h1>
 
-    <p>PDF 파일 첨부</p>
+    <div style=" width : 1000px;
+                    margin: 10px auto 30px auto;">
+
+        <p style="font-size : 18px;
+                    margin-top:30px;
+                    margin-bottom: 30px;">안녕하세요. 점치고 점자 프로그램에 오신 것을 환영합니다.<br/>
+            점치고는 pdf파일을 통한 한글, 영어, 특수 기호의 번역을 지원합니다.<br/>
+            <span style="color:#ff0000;
+                                       font-size:20px;font-weight:bold;">**(단, 현재 버전에서는 영어와 한글을 함께 번역이 불가합니다. 한글 파일/영어 파일 분리해서 번역 사용을 부탁드립니다)**</span><br/>
+            오류가 있을 경우 고객센터를 통해 제보해주세요.
+        </p>
+
+    </div>
+
+    <p style="font-size:24px;
+               font-weight:bold;">● PDF 파일 첨부 </p>
     <form action="http://localhost:5000/PDF_result" method="POST"
-             enctype="multipart/form-data">
-        <div>
+          enctype="multipart/form-data">
+
+        <div style=" border: 3px solid gray;
+                border-radius: 5px;">
 
             번역할 PDF 파일 : <input type="file" name="file"/>
-            <input type="submit" onclick="sumbitButton()"/>
+            <br>
+            <input type = "radio" name="languageCheck" value="kobr" checked>한국어 점자 PDF파일
+            <input type = "radio" name="languageCheck" value="enbr" >영어 점자 PDF파일
+            <input type = "radio" name="languageCheck" value="en" >영어 PDF파일
+            <input type = "radio" name="languageCheck" value="ko" >한국어 PDF파일
+
+<!--            <input type = "checkbox" name="koCheck" value="True">한국어 PDF파일-->
+            <br>
+            <input style = "margin:30px auto 0px auto;"type="submit" onclick="sumbitButton()"/>
         </div>
 
     </form>
@@ -39,14 +70,15 @@
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
     <script>
-            function goPython(){
-                $.ajax({
-                  url: "D:\newTest_mywork\braille_jy_1.py",
-                 context: document.body
-                }).done(function() {
-                 alert('finished python script');;
-                });
-            }
+                function goPython(){
+                    $.ajax({
+                      url: "D:\newTest_mywork\braille_jy_1.py",
+                     context: document.body
+                    }).done(function() {
+                     alert('finished python script');;
+                    });
+                }
+
 
     </script>
 

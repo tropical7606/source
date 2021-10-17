@@ -92,8 +92,15 @@ def abbreviation(cho, jung, jong, repl, mode='jj'):  # 점자 약자 변환을 �
             if letter.jung == jung and letter.jong == jong:
                 letter.braille = [letter.cho_braille, repl]
 
+#def hangleTobraille(message):
+import PyPDF2
 
-def braille(message):
+
+pdf_file = open('braille_jy/텍스트.pdf')#점자.pdf는 점자를 텍스트.pdf는 묵자 pdf 파일을 나타낸다
+input=PyPDF2.pdfFileREader(pdf_file)
+number_of_pages = input.getNumPages()
+page = input.getPage(0)
+def hangleTobraille():
     answerstring = ''
 
     global letter
@@ -104,7 +111,7 @@ def braille(message):
 
     n = -1
 
-    for i in list(message):  # 문자열을 한글/기타로 나눈 뒤 음절 단위로 나눔
+    for i in list(input):  # 문자열을 한글/기타로 나눈 뒤 음절 단위로 나눔
         if hgtk.checker.is_hangul(i):
             each_word_list.append(list(hgtk.letter.decompose(i)) + ['hangul'])
         else:
@@ -185,4 +192,4 @@ def braille(message):
     print(answerstring)  # 출력
 
 if __name__ == '__main__':
-    braille(input('점자 변환기:  '))
+    hangleTobraille()

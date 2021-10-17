@@ -43,63 +43,40 @@ input = [[1, 1, 0, 1, 1, 0],[1, 0, 0, 1, 0, 0],[0, 1, 1, 1, 0, 1]," ",
          [1, 1, 0, 1, 1, 0],[1, 0, 0, 1, 0, 0],[0, 1, 1, 1, 0, 1],
          [0,0,1,1,0,1],[0, 1, 0, 1, 1, 1],[1, 1, 0, 1, 0, 0],
          [1, 1, 0, 1, 1, 0], [1, 0, 0, 1, 0, 0], [0, 1, 1, 1, 0, 1]]
+def EbrailleRun():
+    cnt = 0
+    output = []
+    text = []
+
+    while True:
 
 
+        if cnt == len(input):  # while문 종료 조건
+            output += join_text(text)
+            break
 
+        if input[cnt] == " ":  # 띄어쓰기 0,1,2,3
+            output += join_text(text)
+            output += " "
+            text = []
+            cnt += 1
+            continue
 
-cnt = 0
-output = []
-text = []
+        if input[cnt] == "\n":  # 엔터 시 text에 있는 내용을 output에 저장
+            continue
 
-while True:
-    if cnt == len(input): # while문 종료 조건
-        output += join_text(text)
-        break
+        cnt, tmp, text = check_upper(cnt, input, text)
+        if tmp == True: continue
 
+        cnt, tmp, text = check_punctuation_marks(cnt, input, text)
+        if tmp == True: continue
 
-    if input[cnt] == " ": # 띄어쓰기 0,1,2,3  
-        output += join_text(text)
-        output += " "
-        text = []
-        cnt += 1
-        continue
+        # 숫자
+        cnt, tmp, text = check_num(cnt, input, text)
+        if tmp == True: continue
 
-    if input[cnt] == "\n": # 엔터 시 text에 있는 내용을 output에 저장
-        continue
+        cnt, tmp, text = check_lower(cnt, input, text)
+        if tmp == True: continue
 
-    cnt, tmp, text = check_upper(cnt, input, text)
-    if tmp == True: continue
-
-
-    cnt, tmp, text = check_punctuation_marks(cnt, input, text)
-    if tmp == True: continue
-
-    # 숫자
-    cnt, tmp, text = check_num(cnt, input, text)
-    if tmp == True: continue
-
-    cnt, tmp, text = check_lower(cnt, input, text)
-    if tmp == True: continue
-
-print(text)
-print(output)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    s = "".join(output)
+    return s

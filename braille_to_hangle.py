@@ -36,7 +36,7 @@ def add_output(end_char, text):
     text = []
     return output,text
 
-input = Pdf_to_braille('braille_jy/점자.pdf')[0]
+
 # input = [[1, 1, 0, 1, 0, 0],[0, 1, 0, 0, 1, 0]] #폐 o
 # input = [[1, 1, 0, 1, 0, 0],[1, 0, 1, 0, 0, 1],[0, 1, 0, 0, 1, 0]] #팠 x 파+예
 # input = [[0, 1, 0, 0, 1, 0]] #예 o
@@ -49,6 +49,7 @@ input = Pdf_to_braille('braille_jy/점자.pdf')[0]
 
 
 def brailleRun():
+    input = Pdf_to_braille('점자.pdf')[0]
     cnt = 0
     output = []
     text = []
@@ -65,10 +66,11 @@ def brailleRun():
             continue
 
         if input[cnt] == "\n": # 엔터 시 text에 있는 내용을 output에 저장
-            tmp,text = add_output("\n",text)
+            tmp,text = add_output("<br>",text)
             output += tmp
             cnt += 1
             continue
+
 
         #숫자
         cnt, tmp, text = check_num(cnt, input, text)
@@ -95,8 +97,70 @@ def brailleRun():
         #종성
         cnt,tmp,text = check_jongsung(cnt,input,text)
         if tmp == True: continue
+    print("이게 output원본")
+    print(output)
+    s = "".join(output)
+    print(s)
 
-    return output
+    return s
+
+Tinput = 'a'
+
+def T_Hangle_brailleRun():
+    cnt = 0
+    output = []
+    text = []
+    while True:
+        if cnt == len(Tinput): # while문 종료 조건
+            tmp, text = add_output("", text)
+            output += tmp
+            break
+
+        if Tinput[cnt] == " ": # 띄어쓰기 시 text에 있는 내용을 output에 저장
+            tmp,text = add_output(" ",text)
+            output += tmp
+            cnt += 1
+            continue
+
+        if Tinput[cnt] == "\n": # 엔터 시 text에 있는 내용을 output에 저장
+            tmp,text = add_output("\n",text)
+            output += tmp
+            cnt += 1
+            continue
+
+        #숫자
+        cnt, tmp, text = check_num(cnt, Tinput, text)
+        if tmp == True: continue
+
+        #부사
+        cnt, tmp, text = check_adverb(cnt, Tinput, text)
+        if tmp == True: continue
+
+        #약어
+        cnt,tmp,text = check_acronyms1(cnt, Tinput, text)
+        if tmp == True: continue
+        cnt,tmp,text = check_acronyms2(cnt,Tinput,text)
+        if tmp == True : continue
+
+        #초성
+        cnt,tmp,text = check_chosung(cnt,Tinput,text)
+        if tmp == True : continue
+
+        #중성
+        cnt,tmp,text = check_jungsung(cnt,Tinput,text)
+        if tmp == True : continue
+
+        #종성
+        cnt,tmp,text = check_jongsung(cnt,input,text)
+        if tmp == True: continue
+    print(output)
+    print(output)
+    s = "".join(output)
+    print(s)
+
+    return s
+
+
 
 
 

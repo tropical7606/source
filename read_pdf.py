@@ -28,13 +28,12 @@ def Pdf_to_ASCII(path):
 
     page_text = {} # PDF에서 읽어온 아스키값을 딕셔너리 형대로 저장한곳. 저장형식은 {페이지번호(0 ~ 페이지수-1) : 아스키코드값}
     for page_no in range(total_pages):
+        print(page_text)
         rsrcmgr = PDFResourceManager()
         retstr = StringIO() # PDF에서 읽어온 아스키코드 값이 있는곳.
-       # codec = 'utf-8'
+        codec = 'utf-8'
         laparams = LAParams()
-        device = TextConverter(rsrcmgr, retstr, laparams=laparams)
-        #device = TextConverter(rsrcmgr, retstr, codec = codec, laparams=laparams)
-
+        device = TextConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
         fp = open(path, 'rb')
         password = ""
         maxpages = 0
@@ -46,11 +45,11 @@ def Pdf_to_ASCII(path):
             interpreter.process_page(page)
 
         page_text[page_no] = retstr.getvalue() # 페이지번호(키)-출력값(값) 형태로 딕셔너리에 저장
+        print(page_text)
         page_text[page_no] = page_text[page_no][:-1] # 이렇게 안해주면 출력했을때 맨뒤에 이상한 문자가 생겨서 해줌
     fp.close()
     device.close()
     retstr.close()
-
 
     return total_pages, page_text
 
@@ -81,7 +80,6 @@ def Pdf_to_braille(path):
     }
 
     total_pages, page_text = Pdf_to_ASCII(path) # pdf에서 아스키값을 읽어옴
-
     page_text_braille = {} # page_text의 내용을 페이지번호(키)-점자(값)으로 저장할 딕셔너리
     for i in range(total_pages): # 페이지 단위로 점자 변환
         braille_str = [] # 한 페이지의 변환된 점자를 저장하는 곳
@@ -101,5 +99,4 @@ def Pdf_to_braille(path):
                 j += 2
             braille_str.append(s)
         page_text_braille[i] = braille_str # 페이지번호(키)-점자(값)으로 저장
-
     return page_text_braille

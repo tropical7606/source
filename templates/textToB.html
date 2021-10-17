@@ -7,55 +7,100 @@
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
-         * {
+           * {
                 font-family: 'Jua', sans-serif;
-            }
+              }
             .titlefont{
+                margin:30px auto 30px auto;
                 display: grid;
                 place-items: center;
                 font-size: 60px;
                 font-weight:bold;
             }
-         .textCss{
-                font-size:24px;
-                font-weight:bold;
-                text-align:center;
-                width:1000px;
-                margin: 10px auto 30px auto;
-         }
-         .borderBox{
-                width : 1000px;
-              border: 3px solid gray;
-              border-radius: 5px;
-              margin: 10px auto 30px auto;
-         }
-         .buttonCenter{
-                width:1000px;
-                margin: 10px auto 30px auto;
-         }
+
+
+         .trans-result {
+                display : none;
+        }
     </style>
+    <script>
+        function transButton(){
+            alert("번역을 진행합니다.");
+        }
+
+    </script>
+
 </head>
 <body>
     <h1 class="titlefont">점자 번역 프로그램</h1>
-    <p class="contentText">안녕하세요. 점치고 점자 프로그램에 오신 것을 환영합니다.<br/>
-                    텍스트 번역의 경우 영어 , 한국어 한 언어만을 써서 번역이 가능합니다.<br/>
-                    오류가 있을 경우 고객센터를 통해 제보해주세요.
-                </p>
-    <span class="textCss">텍스트 입력</span>
-    <div class ="borderBox">
-            {{TextData}}
-    </div>
+    <hr  color="gray">
+    <p style="font-size : 18px;
+              display:block;
+              margin-left:130px;">안녕하세요. 점치고 점자 프로그램에 오신 것을 환영합니다.<br/>
+                                  점치고는 pdf파일을 통한 한글, 영어, 특수 기호의 번역을 지원합니다.<br/>
+        <span style="color:#ff0000;font-size:20px;
+                    font-weight:bold;">**(단, 현재 버전에서는 영어와 한글을 함께 번역이 불가합니다. 한글 파일/영어 파일 분리해서 번역 사용을 부탁드립니다)**</span><br/>
+                                오류가 있을 경우 고객센터를 통해 제보해주세요.
+    </p>
 
-    <span class="textCss">번역 결과</span>
-    <div class ="borderBox">
-            {{TextDataResult}}
-    </div>
+    <hr style="width:80%" align="center">
 
-    <div class="btn-group buttonCenter" role="group" aria-label="Basic example">
+    <p style="font-size:24px;
+                            font-weight:bold;
+                            margin-left:150px;">텍스트 입력</p>
+    <div>
+        <form action="http://localhost:5000/text_trans" method="POST" enctype="multipart/form-data">
+
+        <textarea name="inputText" rows="10" cols="120"
+                  style="overflow-y:scroll;
+                                  border: 3px solid gray;
+                                  border-radius: 5px;
+                                  margin-left:180px;
+                                 "></textarea>
+
+        <div align="center" style="margin-bottom:30px; font-weight:bold; color:#FFCC33">
+            <p>● 번역할 언어를 선택해주세요.</p>
+            <div style="margin-left:20px;">
+                <input type="radio" name="laguage"  value="점자"/><span>점자 -> 한글</span>
+                <input type="radio" name="laguage"  value="점자"/><span>점자 -> 영어</span>
+                <input type="radio" name="laguage"  value="영어"/><span>영어</span>
+                <input type="radio" name="laguage" checked="checked" value="한글"/><span>한글</span>
+            </div>
+        </div>
+
+        <button class="btn btn-warning"
+                type="submit" value="번역"
+                style="width:150px; height:70px;
+                    font-weight:bold; font-size :24px;
+                    display:block; color:#ffffff;
+                    margin: 10px auto 30px auto;" id="TextTransButton" onclick="transButton()">번역하기
+        </button>
+
+   </form>
+    </div>
+    <br/>
+        <!--여기까지가 번역하기 전 박스 -->
+
+    <div id ="trans-result">
+        <p style="font-size:24px;
+                font-weight:bold;
+               margin-left:150px;">번역 결과</p>
+
+         <textarea name="inputText" rows="10" cols="120"
+                  style="overflow-y:scroll;
+                                  border: 3px solid gray;
+                                  border-radius: 5px;
+                                  margin-left:180px;">{{TextDataResult}}</textarea>
+
+
+    </div>
+    <div align="center" style="display:block;
+                                margin-bottom:150px;"  class="btn-group buttonCenter" role="group"
+         aria-label="Basic example">
+
         <!--         스타일 가운데 정렬 반응 안함-->
-        <button type="button" class="btn btn-info">오역확인</button>
-        <button type="button" class="btn btn-danger">추천 단어 확인하기</button>
+        <button type="button" style="width:200px;height:80px;font-size:28pt;" class="btn btn-info">오역확인</button>
+        <button type="button" style="width:400px;height:80px;font-size:28pt;" class="btn btn-danger">추천 단어 확인하기</button>
     </div>
-
 </body>
 </html>
